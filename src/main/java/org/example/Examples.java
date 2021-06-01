@@ -23,6 +23,27 @@ public class Examples extends AbstractExamples{
         }
     }
 
+    public void bufferedCopy(File source, File destination){
+        BufferedInputStream in = null;
+        BufferedOutputStream out = null;
+        try{
+            in = new BufferedInputStream(new FileInputStream(source));
+            out = new BufferedOutputStream(new FileOutputStream(destination));
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = in.read(buffer)) > 0){
+                out.write(buffer, 0, bytesRead);
+                out.flush();
+            }
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }finally {
+            closeAll(in, out);
+        }
+    }
+
 
 
 }
